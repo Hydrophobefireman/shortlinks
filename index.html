@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
+    <script>
+        if (typeof firebase === 'undefined') throw new Error(
+            "Firebase SDK Not Detected"
+        );
+        firebase.initializeApp({
+            "apiKey": "AIzaSyCrdjBktQNWizVmfjK50I7BGsIQcNFmKcI",
+            "databaseURL": "https://webmsg-py.firebaseio.com",
+            "storageBucket": "webmsg-py.appspot.com",
+            "authDomain": "webmsg-py.firebaseapp.com",
+            "messagingSenderId": "193257233140",
+            "projectId": "webmsg-py"
+        });
+        const database = firebase.database();
+    </script>
+</head>
+
+<body>
+    <script>
+        ((() => {
+            const hash = window.location.hash.substr(1);
+            if (hash.length === 0) {
+                document.body.textContent = "No Link provided..create a link"
+                return window.location.replace("https://shorterlinks.herokuapp.com/");
+            }
+            if (hash.length < 3) {
+                return document.body.textContent = "No URL exists with the given address";
+            }
+            firebase.database().ref(hash).once("value").then(resp => {
+                const val = resp.val();
+                if (!val) {
+                    return document.body.textContent = "No URL Exists with the Given address";
+                }
+                if (val) {
+                    document.body.innerHTML = `Redirecting to <a href='${val}'>${val}</a>`;
+                    return window.location.replace(val);
+                }
+            })
+        }))()
+    </script>
+    <noscript>This is a javascript based url shortener..</noscript>
+</body>
+
+</html>

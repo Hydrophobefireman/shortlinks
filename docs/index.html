@@ -27,7 +27,7 @@
                 document.body.textContent = "No Link provided..create a link"
                 return window.location.replace("https://shorterlinks.herokuapp.com/");
             }
-            if (hash.length < 3) {
+            if (hash.length <= 2) {
                 return document.body.textContent = "No URL exists with the given address";
             }
             firebase.database().ref(hash).once("value").then(resp => {

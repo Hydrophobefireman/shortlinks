@@ -5,10 +5,10 @@ from firebase_admin import credentials
 
 cred_ = {
     "type": "service_account",
-    "project_id": "webmsg-py",
+    "project_id": "shorterlinks1",
     "private_key_id": os.environ.get("g_private_key_id"),
     "private_key": os.environ.get("g_private_key").replace("\\n", "\n"),
-    "client_email": "pycode@webmsg-py.iam.gserviceaccount.com",
+    "client_email": "firebase-adminsdk-sspe5@shorterlinks1.iam.gserviceaccount.com",
     "client_id": os.environ.get("g_client_id"),
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://oauth2.googleapis.com/token",

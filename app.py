@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 import firebase_admin
 from firebase_admin import db
 from flask import Flask, Response, render_template, request, session
-
+import hashlib
 import envs
 import firebase_manager
 
@@ -14,7 +14,7 @@ import firebase_manager
 
 app = Flask(__name__)
 firebase_admin.initialize_app(
-    firebase_manager.cred, {"databaseURL": "https://webmsg-py.firebaseio.com/"}
+    firebase_manager.cred, {"databaseURL": "https://shorterlinks1.firebaseio.com/"}
 )
 
 

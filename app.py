@@ -26,13 +26,16 @@ def main_create_page():
 @app.route("/api/", methods=["POST"])
 def shorten():
     url = request.form.get("url")
-    ref = db.reference("/")
-    link = get_new_link(ref)
     parse = urlparse(url)
     if parse.scheme == "":
         return Response(json.dumps({"error": "No protocol"}))
+    ref = db.reference("/shortened")
+    ref2 = db.reference("/lookup")
+    link = get_new_link(ref,ref2,url)
     child = ref.child(link)
     child.set(url)
+    lookup=ref2.child(url)
+    lookup.set(link) 
     shortened_URL = f"https://quic.ml/{link}"
     return Response(json.dumps({"success": True, "data": shortened_URL}))
 
@@ -41,7 +44,10 @@ def get_new_url():
     return secrets.token_urlsafe(16)[: random.randint(3, 8)]
 
 
-def get_new_link(ref):
+def get_new_link(ref,ref2,url):
+    is_prev = ref2.order_by_key().equal_to(url).get()
+    if is_prev:
+        return is_prev
     while True:
         k = get_new_url()
         data = ref.order_by_key().equal_to(k).get()

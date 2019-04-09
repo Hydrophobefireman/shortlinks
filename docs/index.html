@@ -19,20 +19,34 @@
 
   <body>
     <script>
-      "use strict";
-      var init = function init() {
-        var hash = window.location.hash.substr(1);
+      const init = () => {
+        const hash = window.location.hash.substr(1);
         if (hash.length === 0) {
           document.body.textContent = "No Link provided..create a link";
-          return window.location=("https://shorterlinks.herokuapp.com/");
+          return window.location.replace("https://shorterlinks.herokuapp.com/");
         }
         if (hash.length <= 2) {
-          return document.body.textContent = "No URL exists with the given address";
+          return (document.body.textContent =
+            "No URL exists with the given address");
         }
-        firebase.database().ref(hash).once("value").then(function (resp) {
-         var val = resp.val();
-          if (!val) {  return document.body.textContent = "No URL Exists with the Given address";
-          }}}init();window.onhashchange=init
+        firebase
+          .database()
+          .ref(hash)
+          .once("value")
+          .then(resp => {
+            const val = resp.val();
+            if (!val) {
+              return (document.body.textContent =
+                "No URL Exists with the Given address");
+            }
+            if (val) {
+              document.body.innerHTML = `Redirecting to <a href='${val}'>${val}</a>`;
+              return window.location.replace(val);
+            }
+          });
+      };
+      window.onhashchange = init;
+      init();
     </script>
     <noscript>This is a javascript based url shortener..</noscript>
   </body>

@@ -46,7 +46,7 @@ def get_new_url():
 def get_new_link(ref,ref2,url):
     is_prev = ref2.order_by_key().equal_to(url).get()
     if is_prev:
-        return is_prev
+        return is_prev[url]
     while True:
         k = get_new_url()
         data = ref.order_by_key().equal_to(k).get()

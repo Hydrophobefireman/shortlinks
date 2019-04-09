@@ -32,7 +32,7 @@
         firebase.database().ref(hash).once("value").then(function (resp) {
          var val = resp.val();
           if (!val) {  return document.body.textContent = "No URL Exists with the Given address";
-          }
+          }}}init();window.onhashchange=init
     </script>
     <noscript>This is a javascript based url shortener..</noscript>
   </body>

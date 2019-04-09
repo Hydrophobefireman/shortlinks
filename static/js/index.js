@@ -59,7 +59,7 @@
         result.textContent = "An Error Occured..please check your input";
       }
 
-      const a = document.createElement(a);
+      const a = document.createElement("a");
       a.href = resp.data;
       a.textContent = resp.data;
       const div = document.createElement("div");

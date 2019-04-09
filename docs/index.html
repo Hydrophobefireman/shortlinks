@@ -31,7 +31,7 @@
         }
         firebase
           .database()
-          .ref(/"shortened/"+hash)
+          .ref("/shortened/" + hash)
           .once("value")
           .then(resp => {
             const val = resp.val();

@@ -6,10 +6,10 @@ from urllib.parse import urlparse
 import firebase_admin
 from firebase_admin import db
 from flask import Flask, Response, render_template, request, session
-import hashlib
 import envs
 import firebase_manager
 
+from URL import URL 
 # TODO add Custom URLS
 
 app = Flask(__name__)
@@ -25,16 +25,15 @@ def main_create_page():
 
 @app.route("/api/", methods=["POST"])
 def shorten():
-    url = request.form.get("url")
-    parse = urlparse(url)
-    if parse.scheme == "":
-        return Response(json.dumps({"error": "No protocol"}))
+    url = URL(request.form.get("url"))
+    urlstr = str(url)
+    urlhash=url.get_url_hash()
     ref = db.reference("/shortened")
     ref2 = db.reference("/lookup")
-    link = get_new_link(ref,ref2,url)
+    link = get_new_link(ref,ref2,urlhash)
     child = ref.child(link)
-    child.set(url)
-    lookup=ref2.child(url)
+    child.set(urlstr)
+    lookup=ref2.child(urlhash)
     lookup.set(link) 
     shortened_URL = f"https://quic.ml/{link}"
     return Response(json.dumps({"success": True, "data": shortened_URL}))

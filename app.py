@@ -33,7 +33,7 @@ def shorten():
         return Response(json.dumps({"error": "No protocol"}))
     child = ref.child(link)
     child.set(url)
-    shortened_URL = f"https://quic.ml/#{link}"
+    shortened_URL = f"https://quic.ml/{link}"
     return Response(json.dumps({"success": True, "data": shortened_URL}))
 
 

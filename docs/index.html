@@ -1,48 +1,39 @@
 <html>
-
-<head>
+  <head>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
     <script>
-        if (typeof firebase === 'undefined') throw new Error(
-            "Firebase SDK Not Detected"
-        );
-        firebase.initializeApp({
-            "apiKey": "AIzaSyDNAOW631nEeOr0KuLYOzzPqTxYWNAOp2A",
-            "databaseURL": "https://shorterlinks1.firebaseio.com",
-            "storageBucket": "shorterlinks1.appspot.com",
-            "authDomain": "shorterlinks1.firebaseapp.com",
-            "messagingSenderId": "1088482919201",
-            "projectId": "shorterlinks1"
-        });
-        const database = firebase.database();
+      if (typeof firebase === "undefined")
+        throw new Error("Firebase SDK Not Detected");
+      firebase.initializeApp({
+        apiKey: "AIzaSyDNAOW631nEeOr0KuLYOzzPqTxYWNAOp2A",
+        databaseURL: "https://shorterlinks1.firebaseio.com",
+        storageBucket: "shorterlinks1.appspot.com",
+        authDomain: "shorterlinks1.firebaseapp.com",
+        messagingSenderId: "1088482919201",
+        projectId: "shorterlinks1"
+      });
+      const database = firebase.database();
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        ((() => {
-            const hash = window.location.hash.substr(1);
-            if (hash.length === 0) {
-                document.body.textContent = "No Link provided..create a link"
-                return window.location.replace("https://shorterlinks.herokuapp.com/");
-            }
-            if (hash.length <= 2) {
-                return document.body.textContent = "No URL exists with the given address";
-            }
-            firebase.database().ref(hash).once("value").then(resp => {
-                const val = resp.val();
-                if (!val) {
-                    return document.body.textContent = "No URL Exists with the Given address";
-                }
-                if (val) {
-                    document.body.innerHTML = `Redirecting to <a href='${val}'>${val}</a>`;
-                    return window.location.replace(val);
-                }
-            })
-        }))()
+      "use strict";
+      var init = function init() {
+        var hash = window.location.hash.substr(1);
+        if (hash.length === 0) {
+          document.body.textContent = "No Link provided..create a link";
+          return window.location=("https://shorterlinks.herokuapp.com/");
+        }
+        if (hash.length <= 2) {
+          return document.body.textContent = "No URL exists with the given address";
+        }
+        firebase.database().ref(hash).once("value").then(function (resp) {
+         var val = resp.val();
+          if (!val) {  return document.body.textContent = "No URL Exists with the Given address";
+          }
     </script>
     <noscript>This is a javascript based url shortener..</noscript>
-</body>
-
+  </body>
 </html>

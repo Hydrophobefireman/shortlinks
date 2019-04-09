@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Redirecting</title>
+  </head>
+
+  <body>
+    <script>
+      (function() {
+        return (window.location.href = "/#"
+          .concat(window.location.pathname)
+          .concat(window.location.search));
+      })();
+    </script>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+    <div>Loading...</div>
+  </body>
+</html>

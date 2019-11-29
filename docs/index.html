@@ -83,7 +83,13 @@
                       "No URL Exists with the Given address");
                   }
                   if (val) {
-                    document.body.innerHTML = `Redirecting to <a href='${val}'>${val}</a>`;
+                    const a  = document.createElement("a");
+                    a.href=val;
+                    a.textContent=val;
+                    const txt = document.createTextNode('Redirecting to ')
+                    document.body.innerHTML = '';
+                    document.body.appendChild(txt);
+                    document.body.appendChild(a);
                     return window.location.replace(val);
                   }
                 });

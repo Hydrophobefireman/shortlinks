@@ -35,11 +35,11 @@ def _abort_request_after(url: str, byte_len: int = 1024):
     return (headers, url)
 
 
-def _normalise_url(parsed, remove_frag: bool = True):
+def _normalise_url(parsed, remove_frag: bool = False):
     d: dict = parsed._asdict()
     d["scheme"] = d["scheme"].lower()
     d["netloc"] = d["netloc"].lower()
-    d["fragment"] = ""
+    #d["fragment"] = ""
     return ParseResult(**d)
 
 

@@ -49,7 +49,7 @@ def get_new_link(ref,ref2,url,req):
     if is_prev:
         return is_prev[url]
     if not ref.order_by_key().equal_to(req).get():
-		return req
+        return req
     while True:
         k = get_new_url()
         data = ref.order_by_key().equal_to(k).get()

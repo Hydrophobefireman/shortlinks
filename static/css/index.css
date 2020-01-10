@@ -8,12 +8,12 @@
     font-weight: bold;
 }
 
-#input_n {
+input {
     border: 1px solid #6200ee;
     border-radius: 20px;
     outline: none;
     width: 50%;
-    padding: 8px;
+    padding: 8px;display block;margin:auto;
 }
 
 #btn_s:hover,

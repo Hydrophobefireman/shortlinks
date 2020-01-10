@@ -20,13 +20,13 @@
   }
 
   const inp = document.getElementById("input_n");
+  const req = document.getElementById("request");
   const btn = document.getElementById("btn_s");
   const errs = document.getElementById("errors");
   const result = document.getElementById("result");
 
-  inp.onkeydown = _ref => {
+  inp.onkeydown = req.onkeydown = _ref => {
     const keyCode = _ref.keyCode;
-
     if (keyCode === 13) {
       btn.click();
     }
@@ -40,7 +40,8 @@
       return (errs.textContent = "An Error Occured..please check the URL");
     } else {
       const _ = urlencode({
-        url: val
+        url: val,
+        request: request.value.trim()
       });
 
       errs.textContent = "loading";

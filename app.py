@@ -26,11 +26,12 @@ def main_create_page():
 @app.route("/api/", methods=["POST"])
 def shorten():
     url = URL(request.form.get("url"))
+    req=request.form.get("request")
     urlstr = str(url)
     urlhash=url.get_url_hash()
     ref = db.reference("/shortened")
     ref2 = db.reference("/lookup")
-    link = get_new_link(ref,ref2,urlhash)
+    link = get_new_link(ref,ref2,urlhash,req)
     child = ref.child(link)
     child.set(urlstr)
     lookup=ref2.child(urlhash)
@@ -43,10 +44,12 @@ def get_new_url():
     return secrets.token_urlsafe(16)[: random.randint(3, 8)]
 
 
-def get_new_link(ref,ref2,url):
+def get_new_link(ref,ref2,url,req):
     is_prev = ref2.order_by_key().equal_to(url).get()
     if is_prev:
         return is_prev[url]
+    if not ref.order_by_key().equal_to(req).get():
+		return req
     while True:
         k = get_new_url()
         data = ref.order_by_key().equal_to(k).get()

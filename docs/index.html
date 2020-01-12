@@ -1,7 +1,11 @@
 <html>
-  <head> </head>
+  <head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Loading</title>
+  </head>
 
   <body>
+    Loading...
     <script>
       (function() {
         function zeroHashLen() {
@@ -17,7 +21,6 @@
         const scriptNames = ["app", "database"];
         const scripts = scriptNames.map(x => path + x + ".js");
 
-        
         function loadScript(src) {
           return new Promise(resolve => {
             if ("caches" in window) {
@@ -83,11 +86,11 @@
                       "No URL Exists with the Given address");
                   }
                   if (val) {
-                    const a  = document.createElement("a");
-                    a.href=val;
-                    a.textContent=val;
-                    const txt = document.createTextNode('Redirecting to ')
-                    document.body.innerHTML = '';
+                    const a = document.createElement("a");
+                    a.href = val;
+                    a.textContent = val;
+                    const txt = document.createTextNode("Redirecting to ");
+                    document.body.innerHTML = "";
                     document.body.appendChild(txt);
                     document.body.appendChild(a);
                     return window.location.replace(val);

@@ -9,7 +9,8 @@ from flask import Flask, Response, render_template, request, session
 import envs
 import firebase_manager
 
-from URL import URL 
+from URL import URL
+
 # TODO add Custom URLS
 
 app = Flask(__name__)
@@ -26,16 +27,16 @@ def main_create_page():
 @app.route("/api/", methods=["POST"])
 def shorten():
     url = URL(request.form.get("url"))
-    req=request.form.get("request")
+    req = request.form.get("request")
     urlstr = str(url)
-    urlhash=url.get_url_hash()
+    urlhash = url.get_url_hash()
     ref = db.reference("/shortened")
     ref2 = db.reference("/lookup")
-    link = get_new_link(ref,ref2,urlhash,req)
+    link = get_new_link(ref, ref2, urlhash, req)
     child = ref.child(link)
     child.set(urlstr)
-    lookup=ref2.child(urlhash)
-    lookup.set(link) 
+    lookup = ref2.child(urlhash)
+    lookup.set(link)
     shortened_URL = f"https://quic.ml/{link}"
     return Response(json.dumps({"success": True, "data": shortened_URL}))
 
@@ -44,11 +45,11 @@ def get_new_url():
     return secrets.token_urlsafe(16)[: random.randint(3, 8)]
 
 
-def get_new_link(ref,ref2,url,req):
+def get_new_link(ref, ref2, url, req):
     is_prev = ref2.order_by_key().equal_to(url).get()
     if is_prev:
         return is_prev[url]
-    if not ref.order_by_key().equal_to(req).get():
+    if req and not ref.order_by_key().equal_to(req).get():
         return req
     while True:
         k = get_new_url()

@@ -1,4 +1,7 @@
 {
+  "functions": {
+    "api/[app].py": {}
+  },
   "routes": [
     { "src": "/(api).*", "dest": "/api/[app].py" },
     { "src": "/create", "dest": "/create.html" }

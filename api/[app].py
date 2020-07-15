@@ -6,10 +6,11 @@ from urllib.parse import urlparse
 import firebase_admin
 from firebase_admin import db
 from flask import Flask, Response, render_template, request, session
-import envs
-import firebase_manager
 
-from URL import URL
+from . import envs
+from . import firebase_manager
+
+from .URL import URL
 
 # TODO add Custom URLS
 

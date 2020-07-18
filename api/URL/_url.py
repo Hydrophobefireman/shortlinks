@@ -1,23 +1,22 @@
 import re
-from urllib.parse import (
-    urlparse as _parse,
-    parse_qs as _qsparse,
-    urlunparse as _unparse,
-    ParseResult,
-    urljoin as _urljoin,
-    unquote,
-)
 from hashlib import new as new_hash_fn
-from typing import Callable, Tuple, Union
 from secrets import token_urlsafe
-from .err import warn_requests, warn_refetch, warn_first_fetch
-from .util import (
-    basic_headers,
-    _normalise_url,
+from typing import Callable, Tuple, Union
+from urllib.parse import ParseResult
+from urllib.parse import parse_qs as _qsparse
+from urllib.parse import unquote
+from urllib.parse import urljoin as _urljoin
+from urllib.parse import urlparse as _parse
+from urllib.parse import urlunparse as _unparse
+
+from ._err import warn_first_fetch, warn_refetch, warn_requests
+from ._util import (
     _abort_request_after,
-    remove_quotes,
-    mime_types,
+    _normalise_url,
+    basic_headers,
     int_or_none,
+    mime_types,
+    remove_quotes,
 )
 
 try:

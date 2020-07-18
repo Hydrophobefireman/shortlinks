@@ -7,10 +7,15 @@ import firebase_admin
 from firebase_admin import db
 from flask import Flask, Response, render_template, request, session
 
-from . import envs
-from . import firebase_manager
+try:
+    from . import envs
+    from . import firebase_manager
 
-from .URL import URL
+    from .URL import URL
+except ImportError:
+    import envs
+    import firebase_manager
+    from URL import URL
 
 # TODO add Custom URLS
 

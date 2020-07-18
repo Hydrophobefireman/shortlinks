@@ -1,7 +1,10 @@
-from urllib.parse import ParseResult
-from os.path import realpath, dirname, join as _path_join
-import requests
 from json import load as json_load
+from os.path import dirname
+from os.path import join as _path_join
+from os.path import realpath
+from urllib.parse import ParseResult
+
+import requests
 
 script_loc = realpath(__file__)
 script_dir = dirname(script_loc)
@@ -39,7 +42,7 @@ def _normalise_url(parsed, remove_frag: bool = False):
     d: dict = parsed._asdict()
     d["scheme"] = d["scheme"].lower()
     d["netloc"] = d["netloc"].lower()
-    #d["fragment"] = ""
+    # d["fragment"] = ""
     return ParseResult(**d)
 
 

@@ -1,4 +1,4 @@
-from .util import *
-from .url import URL
+from ._util import *
+from ._url import URL
 
 __all__ = ["URL"]

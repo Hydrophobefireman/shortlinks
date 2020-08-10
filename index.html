@@ -6,63 +6,8 @@
 
   <body>
     <div>Loading...</div>
-    <script src="/static/7.5.0/firebase-app.js"></script>
-    <script src="/static/7.5.0/firebase-database.js"></script>
     <script>
-      (function () {
-        function zeroHashLen() {
-          document.body.textContent = "No Link provided..create a link";
-          return window.location.replace("/create");
-        }
-        if (window.location.hash.substr(1).length === 0) {
-          return zeroHashLen();
-        }
-
-        if (typeof firebase === "undefined")
-          throw new Error("Firebase SDK Not Detected");
-        firebase.initializeApp({
-          apiKey: "AIzaSyDNAOW631nEeOr0KuLYOzzPqTxYWNAOp2A",
-          databaseURL: "https://shorterlinks1.firebaseio.com",
-          storageBucket: "shorterlinks1.appspot.com",
-          authDomain: "shorterlinks1.firebaseapp.com",
-          messagingSenderId: "1088482919201",
-          projectId: "shorterlinks1",
-        });
-        const database = firebase.database();
-        const init = () => {
-          const hash = window.location.hash.substr(1);
-          if (hash.length === 0) {
-            return zeroHashLen();
-          }
-          if (hash.length <= 2) {
-            return (document.body.textContent =
-              "No URL exists with the given address");
-          }
-          firebase
-            .database()
-            .ref("/shortened/" + hash)
-            .once("value")
-            .then((resp) => {
-              const val = resp.val();
-              if (!val) {
-                return (document.body.textContent =
-                  "No URL Exists with the Given address");
-              }
-              if (val) {
-                const a = document.createElement("a");
-                a.href = val;
-                a.textContent = val;
-                const txt = document.createTextNode("Redirecting to ");
-                document.body.innerHTML = "";
-                document.body.appendChild(txt);
-                document.body.appendChild(a);
-                return window.location.replace(val);
-              }
-            });
-        };
-        window.onhashchange = init;
-        init();
-      })();
+      location = "/create";
     </script>
     <noscript>This is a javascript based url shortener..</noscript>
   </body>

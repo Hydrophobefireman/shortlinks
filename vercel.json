@@ -1,9 +1,8 @@
 {
-  "functions": {
-    "api/[app].py": { "memory": 1024 }
-  },
   "routes": [
-    { "src": "/(api).*", "dest": "/api/[app].py" },
-    { "src": "/create", "dest": "/create.html" }
+    { "handle": "filesystem" },
+    { "src": "/", "dest": "/create.html" },
+    { "src": "/create", "dest": "/create.html" },
+    { "src": "/.*", "dest": "/api/app.py" }
   ]
 }

@@ -5,14 +5,15 @@ from urllib.parse import urlparse
 
 import firebase_admin
 from firebase_admin import db
-from flask import Flask, Response, render_template, request, session
+from flask import Flask, Response, render_template, request, session, redirect
+from re import compile as cmp
 
 try:
     from . import envs
     from . import firebase_manager
-
     from .URL import URL
-except ImportError:
+except ImportError as e:
+
     import envs
     import firebase_manager
     from URL import URL
@@ -47,19 +48,36 @@ def shorten():
     return Response(json.dumps({"success": True, "data": shortened_URL}))
 
 
+@app.route("/<u>/", strict_slashes=False)
+def send_redirect(u):
+    ref = db.reference("/shortened")
+    ret = ref.child(u).get()
+    if ret:
+        return redirect(ret, 301)
+    return "nothing here"
+
+
 def get_new_url():
     return secrets.token_urlsafe(16)[: random.randint(3, 8)]
 
 
+valid_reg = cmp(r"([^\w]|_)").sub
+
+
+def is_allowed(req):
+    print(valid_reg(req, ""))
+    return "/" not in req and valid_reg("", req) == req
+
+
 def get_new_link(ref, ref2, url, req):
-    is_prev = ref2.order_by_key().equal_to(url).get()
+    is_prev = ref2.child(url).get()
     if is_prev:
-        return is_prev[url]
-    if req and not ref.order_by_key().equal_to(req).get():
+        return is_prev
+    if req and is_allowed(req) and not ref.child(req).get():
         return req
     while True:
         k = get_new_url()
-        data = ref.order_by_key().equal_to(k).get()
+        data = ref.child(k).get()
         # check if a link has been used previously
         if not data:
             return k

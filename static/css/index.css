@@ -1,43 +1,49 @@
 .center {
-    margin: auto;
-    text-align: center
+  margin: auto;
+  text-align: center;
 }
 
 .header {
-    font-size: 25px;
-    font-weight: bold;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 input {
-    border: 1px solid #6200ee;
-    border-radius: 20px;
-    outline: none;
-    width: 50%;
-    padding: 8px;display block;margin:auto;
+  border: 1px solid #6200ee;
+  border-radius: 20px;
+  outline: none;
+  width: 50%;
+  padding: 8px;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
 }
 
 #btn_s:hover,
 #btn_s:active {
-    box-shadow: 2px 2px #d9dce0;
-    background-color: #6200ee;
-    color: #fff;
+  box-shadow: 2px 2px #d9dce0;
+  background-color: #6200ee;
+  color: #fff;
 }
 
 #errors {
-    color: #ff0000;
-    font-weight: bold;
+  color: #ff0000;
+  font-weight: bold;
 }
 
 #btn_s {
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 4px;
-    border: 1px solid #6200ee;
-    outline: none;
-    color: #6200ee;
-    text-transform: uppercase;
-    min-width: 80px;
-    height: 30px;
-    margin: 10px;
-    cursor: pointer;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 4px;
+  border: 1px solid #6200ee;
+  outline: none;
+  color: #6200ee;
+  text-transform: uppercase;
+  min-width: 80px;
+  height: 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

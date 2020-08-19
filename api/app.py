@@ -35,7 +35,10 @@ def main_create_page():
 def shorten():
     url = URL(request.form.get("url"))
     req = request.form.get("request")
+    if "quic.ml" in url.host.lower():
+        return {"error": "no"}
     urlstr = str(url)
+
     urlhash = url.get_url_hash()
     ref = db.reference("/shortened")
     ref2 = db.reference("/lookup")
@@ -58,14 +61,14 @@ def send_redirect(u):
 
 
 def get_new_url():
-    return secrets.token_urlsafe(16)[: random.randint(3, 8)]
+    return secrets.token_urlsafe()[: random.randint(3, 8)]
 
 
-valid_reg = cmp(r"([^\w]|_)").sub
+valid_reg = cmp(r"([^\w]|_|-)").sub
 
 
 def is_allowed(req):
-    print(valid_reg(req, ""))
+
     return "/" not in req and valid_reg("", req) == req
 
 

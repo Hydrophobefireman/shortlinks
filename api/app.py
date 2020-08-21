@@ -5,7 +5,15 @@ from urllib.parse import urlparse
 
 import firebase_admin
 from firebase_admin import db
-from flask import Flask, Response, render_template, request, session, redirect
+from flask import (
+    Flask,
+    Response,
+    render_template,
+    request,
+    session,
+    redirect,
+    make_response,
+)
 from re import compile as cmp
 
 try:
@@ -56,7 +64,9 @@ def send_redirect(u):
     ref = db.reference("/shortened")
     ret = ref.child(u).get()
     if ret:
-        return redirect(ret, 301)
+        resp = make_response(redirect(ret, 301))
+        resp.headers["s-maxage"] = 31536000
+        return resp
     return "nothing here"
 
 

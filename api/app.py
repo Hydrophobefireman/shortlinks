@@ -65,7 +65,7 @@ def send_redirect(u):
     ret = ref.child(u).get()
     if ret:
         resp = make_response(redirect(ret, 301))
-        resp.headers["s-maxage"] = 31536000
+        resp.headers["cache-control"] = "s-maxage=31536000"
         return resp
     return "nothing here"
 

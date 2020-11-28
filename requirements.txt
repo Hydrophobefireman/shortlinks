@@ -1,3 +1,0 @@
-Flask==1.0.2
-firebase_admin==2.13.0
-gunicorn==19.9.0

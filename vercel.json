@@ -1,8 +1,0 @@
-{
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/", "dest": "/create.html" },
-    { "src": "/create", "dest": "/create.html" },
-    { "src": "/.*", "dest": "/api/app.py" }
-  ]
-}

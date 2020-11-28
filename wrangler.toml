@@ -1,0 +1,12 @@
+name = "quic"
+type = "webpack"
+account_id = "b1412eec53e17e0d18b8fedc5c7f96c9"
+workers_dev = true
+route = "quic.ml/*"
+zone_id = "f90f61f5e9cb661583aa651f99f69f59"
+
+kv-namespaces = [
+  { binding =  'ALREADY_ADDED_BUCKET', id = '6a049304c07c414383bfdd4f27b29946' },
+  { binding = 'REDIRECT_BUCKET', id = 'ac346fe54de74a009de425a6e8bfa62c'}
+]
+

@@ -16,6 +16,9 @@ export async function addToKV(event, url) {
     if (!u) return html();
 
     let longURL = new URL(u);
+    if (!longURL.host.includes(".")) {
+      throw new Error();
+    }
     if (url.hostname === longURL.hostname) {
       return json({ success: true, data: longURL.pathname.substr(1) });
     }

@@ -17,7 +17,7 @@ async function handleEvent(event) {
   // options.mapRequestToAsset = handlePrefix(/^\/docs/)
 
   try {
-    if (url.pathname === "/" || url.pathname === "/create") return indexPage();
+    if (url.pathname === "/" || url.pathname === "/create") return indexPage;
     if (DEBUG) {
       // customize caching
       options.cacheControl = {

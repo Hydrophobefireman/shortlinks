@@ -1,7 +1,6 @@
 import { html } from "./util";
 
-export function indexPage() {
-  return html(`<!DOCTYPE html>
+export const indexPage = html(`<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -90,4 +89,3 @@ export function indexPage() {
         </script>
       </body>
     </html>`);
-}
